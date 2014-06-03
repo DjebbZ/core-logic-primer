@@ -1,4 +1,4 @@
-(ns enigmes-logiques.core
+(ns enigmes-logiques
   (:require [clojure.core.logic :as l])
   (:require [clojure.core.logic.fd :as fd]))
 
