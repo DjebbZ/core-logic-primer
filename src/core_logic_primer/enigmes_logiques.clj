@@ -32,21 +32,11 @@
 
 (l/run* [q]
     (l/fresh [mon-age ton-age]
-         (fd/in q mon-age ton-age (fd/interval 90))
-;;            4 * mon-age = 3 * ton-age
-;;            3 * mon-age - ton-age = 90
-;;              avec les opérateurs arithmetiques
-;;          (fd/* 2 (fd/- ton-age (fd/- mon-age ton-age)) mon-age)
-;;          (fd/+ mon-age (fd/+ mon-age (fd/- mon-age ton-age)) 90)
-
-;;              avec fd/eq
-;;          (fd/eq
-;;               (= mon-age (* 2 (- ton-age (- mon-age ton-age) ))))
-;;              (= 90 (+ mon-age mon-age (- mon-age ton-age)))
-;;          (fd/== (* 4 ton-age) (* 3 mon-age))
-;;          (fd/q)
-
-         (l/== q mon-age)))
+        (fd/in q mon-age ton-age (fd/interval 90))
+        (fd/eq
+           (= (* 4 ton-age) (* 3 mon-age))
+           (= (- (* 3 mon-age) ton-age) 90))
+        (l/== q mon-age)))
 
 
 
