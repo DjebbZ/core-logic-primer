@@ -44,30 +44,29 @@
 
 
 
-;; http://enigmes.info/enigmes-logiques/2
-;; Qui élève les poissons ?
-;; Il y a 5 maisons alignées de couleurs différentes.
-;; Dans chaque maison vit une personne de nationalité différente.
-;; Chaque personne boit une boisson, fume un type de cigarettes et élève un animal différent.
-;; Pouvez-vous dire qui élève les poissons, sachant que :
+;; http://enigmesetdevinettes.com/enigme/enigme-einstein/
+;; Enigme Einstein – Le problème d’Einstein
+;; Dans l’exemple des cinq maisons, il y a un énoncé et 14 indices.
+;; Cinq hommes de nationalité et de professions différentes habitent avec leur animal préféré
+;; cinq maisons de couleurs différentes où ils boivent leur boisson préférée.
 
-;;     l'anglais vit dans la maison rouge.
-;;     le suédois élève des chiens.
-;;     le danois boit du thé.
-;;     la maison verte est juste à gauche de la maison blanche.
-;;     le propriétaire de la maison verte du café.
-;;     le fumeur de pall mall élève des oiseaux.
-;;     le propriétaire de la maison jaune fume des dunhills.
-;;     l'homme qui vit dans la maison du centre boit du lait.
-;;     le norvégien vit dans la première maison.
-;;     l'homme qui fume des blends vit à coté de celui qui élève des chats.
-;;     la personne qui élève des chevaux vit à coté du fumeur de dunhills.
-;;     l'homme qui fume des blue masters boit de la bière.
-;;     l'allemand fume des princes.
-;;     le norvégien vit à coté de la maison bleue.
-;;     l'homme qui fume des blends à un voisin qui boit de l'eau.
+;; L’Anglais habite la maison rouge.
+;; L’Espagnol adore son chien.
+;; L’Islandais est ingénieur.
+;; On boit du café dans la maison verte.
+;; La maison verte est située immédiatement à gauche de la maison blanche.
+;; Le sculpteur possède un âne.
+;; Le diplomate habite la maison jaune.
+;; Le Norvégien habite la première maison à gauche.
+;; Le médecin habite la maison voisine de celle où demeure le propriétaire du renard.
+;; La maison du diplomate est voisine de celle où il y a un cheval.
+;; On boit du lait dans la maison du milieu.
+;; Le Slovène boit du thé.
+;; Le violoniste boit du jus d’orange.
+;; Le Norvégien demeure à côté de la maison bleue.
 
-;; Ce fameux casse tête fut posé par Albert Einstein (1879 - 1955). Selon lui, 98% des gens sont incapables de le résoudre.
+;; Cette fameuse énigme d’Einstein aurait été inventée par Albert Einstein lorsqu’il était encore enfant.
+;; Selon la légende, Einstein aurait aussi dit que seulement 2% de la population était capable de résoudre cette énigme.
 
 
 
@@ -88,3 +87,14 @@
 
 ;; Each letter represents a different digit in the range 0 through 9,
 ;; and the two leading digits S and M should be nonzero.
+
+(l/run* [q]
+    (l/fresh [s e n d m o r y]
+         (fd/in e n d o r y (fd/interval 0 9))
+         (fd/in s m (fd/interval 1 9))
+         (fd/distinct [s e n d m o r y])
+         (fd/eq
+              (= (+ (+ (* s 1000) (* e 100) (* n 10) d)
+                    (+ (* m 1000) (* o 100) (* r 10) e))
+                 (+ (* m 10000) (* o 1000) (* n 100) (* e 10) y)))
+         (l/== q [s e n d "" m o r e "" m o n e y])))
