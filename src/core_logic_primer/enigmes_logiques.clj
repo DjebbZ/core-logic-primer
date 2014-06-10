@@ -88,3 +88,14 @@
 
 ;; Each letter represents a different digit in the range 0 through 9,
 ;; and the two leading digits S and M should be nonzero.
+
+(l/run* [q]
+    (l/fresh [s e n d m o r y]
+         (fd/in e n d o r y (fd/interval 0 9))
+         (fd/in s m (fd/interval 1 9))
+         (fd/distinct [s e n d m o r y])
+         (fd/eq
+              (= (+ (+ (* s 1000) (* e 100) (* n 10) d)
+                    (+ (* m 1000) (* o 100) (* r 10) e))
+                 (+ (* m 10000) (* o 1000) (* n 100) (* e 10) y)))
+         (l/== q [s e n d m o r e m o n e y])))
