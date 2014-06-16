@@ -6,12 +6,12 @@
 
 (run* [a b]
   (== a 2)
-  (logic/!= b 1)
+  (!= b 1)
   (== a b))
 
 (run* [q]
-  (logic/membero q [1 2 3])
-  (logic/membero q [2 3 4]))
+  (membero q [1 2 3])
+  (membero q [2 3 4]))
 
 (run* [q]
   (== q {:a 1 :b 2}))
@@ -39,60 +39,60 @@
   (== q 2))
 
 (run* [q]
-  (logic/membero q [1 2 3])
-  (logic/membero q [3 4 5]))
+  (membero q [1 2 3])
+  (membero q [3 4 5]))
 
 (run* [q]
-  (logic/fresh [a]
-     (logic/membero a [1 2 3])
-     (logic/membero q [3 4 5])
+  (fresh [a]
+     (membero a [1 2 3])
+     (membero q [3 4 5])
      (== a q)))
 
 (run* [q]
-  (logic/conde
-   [logic/succeed]))
+  (conde
+   [succeed]))
 
 (run* [q]
-  (logic/conde
-   [logic/succeed logic/succeed logic/succeed logic/succeed]))
+  (conde
+   [succeed succeed succeed succeed]))
 
 (run* [q]
-  (logic/conde
-   [logic/succeed logic/fail logic/succeed logic/succeed]))
+  (conde
+   [succeed fail succeed succeed]))
 
 
 (run* [q]
-  (logic/conde
-   [logic/succeed]
-   [logic/succeed]
-   [logic/fail]))
+  (conde
+   [succeed]
+   [succeed]
+   [fail]))
 
 (run* [q]
-  (logic/conde
-   [logic/succeed (== q 1)]))
+  (conde
+   [succeed (== q 1)]))
 
 (run* [q]
-  (logic/conde
+  (conde
    [(== q 1) (== q 2)]))
 
 (run* [q]
-  (logic/conde
+  (conde
    [(== q 1)]
    [(== q 2)]))
 
 
 (run* [q]
-  (logic/conso 1 [2 3] q))
+  (conso 1 [2 3] q))
 
 (run* [q]
-  (logic/conso q [2 3] [1 2 3]))
+  (conso q [2 3] [1 2 3]))
 
 (run* [q]
-  (logic/conso 1 [2 q] [1 2 3]))
+  (conso 1 [2 q] [1 2 3]))
 
 (run* [q]
-  (logic/resto [1 2 3 4] q))
+  (resto [1 2 3 4] q))
 
 (run* [q]
-  (logic/membero q [1 2 3]))
+  (membero q [1 2 3]))
 
