@@ -1,4 +1,4 @@
-(ns relations-facts
+(ns relations-solutions
   (:require [clojure.core.logic :as l])
   (:require [clojure.core.logic.pldb :as pldb]))
 
@@ -50,21 +50,21 @@
 
 (pldb/with-db parents
   (l/run* [q]
-        (parent q 'Michael)))
+        (parento q 'Michael)))
 
 ;; Définir une relation grand-parent :
 ;; Un grand-parent est le parent du parent d'un enfant !
 
 (defn grand-parento [gparent child]
   (l/fresh [q]
-       (parent gparent q)
-       (parent q child)))
+       (parento gparent q)
+       (parento q child)))
 
 ;; Qui sont les petits enfants de Vito ?
 
 (pldb/with-db parents
   (l/run* [q]
-      (grand-parent 'Vito q)))
+      (grand-parento 'Vito q)))
 
 ;; Trouvez les couples distincts de parents
 
