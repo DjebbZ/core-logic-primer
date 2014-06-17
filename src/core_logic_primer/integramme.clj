@@ -35,7 +35,7 @@
 ;; Solutions from https://github.com/swannodette/logic-tutorial#zebras
 
 (l/defne righto [x y l]
-  ([_ _ [x y . ?r]])
+  ([_ _ [x y . _]])
   ([_ _ [_ . ?r]] (righto x y ?r)))
 
 (defn nexto [x y l]
@@ -87,4 +87,24 @@
       (l/membero [eleveur-zebre _ _ 'zebre _] hs)
       (l/== q {:buveur-eau buveur-eau :eleveur-zebre eleveur-zebre}))))
 
-(l/run 1 [q](zebrao q))
+(l/run 1 [q] (zebrao q))
+
+
+(pldb/db-rel person nat job drink animal color pos)
+
+(def people
+  (macro/symbol-macrolet [_ (l/lvar)]
+       (pldb/db [person 'norvégien _ _ _ _]
+                [person 'anglais _ _ _ 'rouge]
+                [person 'espagnol _ _ 'chien _]
+                [person _ _ 'café _ 'verte]
+                [person _ 'sculpteur _ 'âne _]
+                [person _ 'diplomate _ _ 'jaune]
+                [person 'slovene _ 'thé _ _]
+                [person _ 'violoniste 'jus-orange _ _]
+                [person 'islandais 'ingenieur _ _ _])))
+
+(pldb/with-db people
+  (l/run* [q]
+       (person q (l/lvar) 'thé (l/lvar) (l/lvar))))
+
